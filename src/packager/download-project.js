@@ -1,6 +1,7 @@
 import JSZip from 'jszip';
 import EventTarget from '../common/event-target';
 import optimizeSb3Json from './minify/sb3';
+import ExtendedJSON from './extended-json';
 
 const ASSET_HOST = 'https://assets.scratch.mit.edu/internalapi/asset/$path/get/';
 
@@ -299,7 +300,7 @@ export const downloadProject = async (data, progressCallback) => {
         zip = zip.folder(pathPrefix);
       }
       const projectDataText = await projectDataFile.async('text');
-      const projectData = JSON.parse(projectDataText);
+      const projectData = ExtendedJSON.parse(projectDataText);
       type = identifyProjectType(projectData);
       if (type === 'sb3') {
         zip.file('project.json', JSON.stringify(optimizeSb3Json(projectData)));

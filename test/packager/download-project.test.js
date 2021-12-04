@@ -38,6 +38,10 @@ test('sb3 with music', async () => {
   expect(project.analysis.usesMusic).toBe(true);
 });
 
+test('sb2 non standard json', async () => {
+  await downloadProject(readTestProject('non-standard-json.sb2'), () => {});
+});
+
 test('sb2', async () => {
   const project = await downloadProject(readTestProject('no-music.sb2'), () => {});
   expect(project.blob.size).toBe(6259);
